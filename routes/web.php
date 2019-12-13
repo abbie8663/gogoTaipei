@@ -15,6 +15,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::get('/master', function () {
+    return view('layouts.master');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+
+
+Route::get('/home', function () {
+    return view('gogoTaipei.index');
+})->name('home');
+
+Route::get('/views', function () {
+    return view('gogoTaipei.viewlist');
+})->name('viewlist');
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
