@@ -19,10 +19,11 @@
                     </div>
 
                     <div class="form-search-wrap p-2" data-aos="fade-up" data-aos-delay="200">
-                        <form method="post">
+                        <form action="{{ route('search_viewlist') }}" method="post">
+                        {{ csrf_field() }}
                             <div class="row align-items-center">
                                 <div class="col-lg-12 col-xl-10 no-sm-border border-right">
-                                    <input type="text" class="form-control" placeholder="What are you looking for?">
+                                    <input type="text" class="form-control" name="search" placeholder="Where are you looking for?">
                                 </div>
 
 

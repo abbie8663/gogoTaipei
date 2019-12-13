@@ -28,9 +28,17 @@ Route::get('/home', function () {
     return view('gogoTaipei.index');
 })->name('home');
 
-Route::get('/views', function () {
-    return view('gogoTaipei.viewlist');
-})->name('viewlist');
+Route::get('/views', 'ViewController@index')->name('viewlist');
+Route::post('/views', 'ViewController@search')->name('search_viewlist');
+
+
+
+
+
+
+
+
+
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
