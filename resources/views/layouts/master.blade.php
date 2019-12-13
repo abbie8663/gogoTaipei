@@ -103,7 +103,7 @@
   <!-- footer -->
   <footer>
     <div class="container">
-      <div class="row pt-5 mt-5">
+      <div class="row mt-5">
         <div class="col-12 text-md-center text-left">
           <p>
             <!-- Link back to Free-Template.co can't be removed. Template is licensed under CC BY 3.0. -->

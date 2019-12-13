@@ -44,8 +44,11 @@ class ViewController extends Controller
         ->orwhere('py', 'like', '%'.$search.'%')
         ->paginate(15);
 
-
-
         return view('gogoTaipei.viewlist',['view'=>$view]);
+    }
+
+    public function viewinfo($id){
+        $view = DB::table('views')->where('id', $id)->first();
+        return view('gogoTaipei.viewinfo',['view'=>$view]);
     }
 }

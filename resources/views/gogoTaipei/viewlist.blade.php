@@ -5,21 +5,15 @@
 
 @section('content')
 
-<div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(images/xmas.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+<div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(/images/xmas.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
     <div class="container">
         <div class="row align-items-center justify-content-center text-center">
-
             <div class="col-md-10" data-aos="fade-up" data-aos-delay="400">
-
-
                 <div class="row justify-content-center">
                     <div class="col-md-8 text-center">
                         <h1>viewlist</h1>
-                        {{-- <p data-aos="fade-up" data-aos-delay="100">Handcrafted free templates by <a href="https://free-template.co/" target="_blank">Free-Template.co</a></p> --}}
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -42,8 +36,8 @@
                         <img src="images/img_1.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
                     </div>
                     <div class="listing-item-content">
-                        <a href="listings-single.html" class="bookmark" data-toggle="tooltip" data-placement="left" title="Bookmark"><span class="icon-heart"></span></a>
-                        <h2 class="mb-1"><a href="listings-single.html">{{$row->name}}</a></h2>
+                        <a href="/viewinfo/{{$row->id}}" class="bookmark" data-toggle="tooltip" data-placement="left" title="Bookmark"><span class="icon-heart"></span></a>
+                        <h2 class="mb-1"><a href="/viewinfo/{{$row->id}}">{{$row->name}}</a></h2>
                         <!-- <span class="address">West Orange, New York</span> -->
                     </div>
                 </div>

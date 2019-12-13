@@ -30,8 +30,12 @@ Route::get('/home', function () {
 
 Route::get('/views', 'ViewController@index')->name('viewlist');
 Route::post('/views', 'ViewController@search')->name('search_viewlist');
+Route::get('/viewinfo/{id}', 'ViewController@viewinfo')->name('viewinfo');
 
 
+Route::get('/viewinfo', function () {
+    return view('gogoTaipei.viewinfo');
+})->name('viewinfo');
 
 
 
