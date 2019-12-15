@@ -59,12 +59,13 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-              <li class="@yield('nav_home')"><a href="{{ route('home') }}"><span>Home</span></a></li>
-              <li class="@yield('nav_views')"><a href="{{ route('viewlist') }}"><span>Views</span></a></li>
+                <li class="@yield('nav_home')"><a href="{{ route('home') }}"><span>Home</span></a></li>
+                <li class="@yield('nav_views')"><a href="{{ route('viewlist') }}"><span>Views</span></a></li>
+                <li class="@yield('nav_message')"><a href="{{ route('message') }}"><span>Message</span></a></li>
                 <li class="@yield('nav_login')"><a href="index.html"><span>Login</span></a></li>
 
 
-                <li class="@yield('nav_Dropdown') has-children">
+                <!-- <li class="@yield('nav_Dropdown') has-children">
                   <a href="about.html"><span>Dropdown</span></a>
                   <ul class="dropdown arrow-top">
                     <li><a href="#">Menu One</a></li>
@@ -80,7 +81,7 @@
                       </ul>
                     </li>
                   </ul>
-                </li>
+                </li> -->
 
                 <li class="@yield('nav_Blog')"><a href="blog.html"><span>Blog</span></a></li>
                 <li class="@yield('nav_Contact')"><a href="contact.html"><span>Contact</span></a></li>

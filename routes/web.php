@@ -28,14 +28,18 @@ Route::get('/home', function () {
     return view('gogoTaipei.index');
 })->name('home');
 
+//景點列表
 Route::get('/views', 'ViewController@index')->name('viewlist');
 Route::post('/views', 'ViewController@search')->name('search_viewlist');
 Route::get('/viewinfo/{id}', 'ViewController@viewinfo')->name('viewinfo');
 
+//留言板
+Route::get('/message', 'MessageController@index')->name('message');
 
-Route::get('/viewinfo', function () {
-    return view('gogoTaipei.viewinfo');
-})->name('viewinfo');
+
+// Route::get('/viewinfo', function () {
+//     return view('gogoTaipei.viewinfo');
+// })->name('viewinfo');
 
 
 
