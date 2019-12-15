@@ -47,6 +47,6 @@ Route::get('/message', 'MessageController@index')->name('message');
 
 
 
-// Auth::routes();
+Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');

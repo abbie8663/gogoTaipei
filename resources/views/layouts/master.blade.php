@@ -62,8 +62,6 @@
                 <li class="@yield('nav_home')"><a href="{{ route('home') }}"><span>Home</span></a></li>
                 <li class="@yield('nav_views')"><a href="{{ route('viewlist') }}"><span>Views</span></a></li>
                 <li class="@yield('nav_message')"><a href="{{ route('message') }}"><span>Message</span></a></li>
-                <li class="@yield('nav_login')"><a href="index.html"><span>Login</span></a></li>
-
 
                 <!-- <li class="@yield('nav_Dropdown') has-children">
                   <a href="about.html"><span>Dropdown</span></a>
@@ -82,9 +80,35 @@
                     </li>
                   </ul>
                 </li> -->
+                @guest
+                <li><a href="{{ route('login') }}"><span>{{ __('Login') }}</span></a></li>
+                @if (Route::has('register'))
+                <li><a href="{{ route('register') }}"><span>{{ __('Register') }}</span></a></li>
+                @endif
 
-                <li class="@yield('nav_Blog')"><a href="blog.html"><span>Blog</span></a></li>
-                <li class="@yield('nav_Contact')"><a href="contact.html"><span>Contact</span></a></li>
+                @else
+                <li class=" has-children">
+                  <a href="#"><span>{{ Auth::user()->name }}</span></a>
+                  <ul class="dropdown arrow-top">
+                    
+                    <li><a href="#">會員資料</a></li>
+                    <li><a href="#">我的珍藏</a></li>
+                    <li><a href="#">我的行程</a></li>
+                    <li>
+                      <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                      </a>
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                      </form>
+                    </li>
+                  </ul>
+                </li>
+                @endguest
+
+
+
               </ul>
             </nav>
           </div>
