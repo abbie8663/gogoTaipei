@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="form-search-wrap p-2" data-aos="fade-up" data-aos-delay="200">
-                        <form action="{{ route('search_viewlist') }}" method="post">
+                        <form action="{{ action('ViewController@search') }}" method="post">
                         {{ csrf_field() }}
                             <div class="row align-items-center">
                                 <div class="col-lg-12 col-xl-10 no-sm-border border-right">

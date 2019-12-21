@@ -33,17 +33,34 @@
                 <div class="mb-3">{{$view->opentime}}</div>
                 <p class="mb-4">{{$view->description}}</p>
 
-                <div>
-                    <div class="font-weight-bold">{{"選擇出發日期"}}</div>
-
-                </div>
-
-                <form class="form-group row">
+                <form class="form-group" action="{{ route('views.store') }}" method="post">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="uid" value="{{Auth::user()->id}}">
+                    <input type="hidden" name="vid" value="{{$view->id}}">
 
 
-                    <input class="col form-control" id="formControInputDate" type="datetime-local" name="traveltime">
-        
-                    <button type="submit" class="btn btn-primary mb-2 ml-3 col-2 ">確認</button>
+                    <div class="form-row">
+                        <div class="col-5">
+                            <label class="font-weight-bold">選擇出發時間</label>
+                        </div>
+                        <div class="col-5">
+                            <label class="font-weight-bold">選擇結束時間</label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-5">
+                            <input class="form-control" type="datetime-local" name="start_date">
+                        </div>
+
+                        <div class="col-5">
+                            <input class="form-control" type="datetime-local" name="end_date">
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-primary  ">確認</button>
+                        </div>
+                    </div>
+
 
 
                 </form>

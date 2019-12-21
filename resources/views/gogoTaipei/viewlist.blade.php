@@ -36,17 +36,17 @@
                         <img src="images/img_1.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
                     </div>
                     <div class="listing-item-content">
-                        <a href="/viewinfo/{{$row->id}}" class="bookmark" data-toggle="tooltip" data-placement="left" title="Bookmark"><span class="icon-heart"></span></a>
-                        <h2 class="mb-1"><a href="/viewinfo/{{$row->id}}">{{$row->name}}</a></h2>
+                        <a href="{{action('ViewController@show',$row->id)}}" class="bookmark" data-toggle="tooltip" data-placement="left" title="Bookmark"><span class="icon-heart"></span></a>
+                        <h2 class="mb-1"><a href="{{action('ViewController@show',$row->id)}}">{{$row->name}}</a></h2>
                         <!-- <span class="address">West Orange, New York</span> -->
                     </div>
                 </div>
             </div>
             @endforeach
         </div>
-        <div class="row align-items-center justify-content-center">
+        <!-- <div class="row align-items-center justify-content-center">
         {{ $view->links() }}
-        </div>
+        </div> -->
        
     </div>
 </div>

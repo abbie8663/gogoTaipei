@@ -29,9 +29,9 @@ Route::get('/home', function () {
 })->name('home');
 
 //景點列表
-Route::get('/views', 'ViewController@index')->name('viewlist');
-Route::post('/views', 'ViewController@search')->name('search_viewlist');
-Route::get('/viewinfo/{id}', 'ViewController@viewinfo')->name('viewinfo');
+Route::resource('views', 'ViewController');
+Route::post('/viewlist', 'ViewController@search')->name('search_viewlist');
+
 
 //留言板
 Route::get('/message', 'MessageController@index')->name('message');

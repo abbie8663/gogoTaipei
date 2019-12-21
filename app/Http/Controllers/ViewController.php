@@ -8,29 +8,17 @@ use Illuminate\Support\Facades\DB;
 class ViewController extends Controller
 {
     /**
-     * Create a new controller instance.
+     * Display a listing of the resource.
      *
-     * @return void
+     * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-
     public function index(){
         $view = DB::table('views')->paginate(15);
         return view('gogoTaipei.viewlist',['view'=>$view]);
     }
-    
-     
+
     public function search(Request $request)
-    {
+    {//搜尋景點
         $search = $request->input('search');
       
         $view = DB::table('views')->where('id', 'like', '%'.$search.'%')
@@ -47,8 +35,74 @@ class ViewController extends Controller
         return view('gogoTaipei.viewlist',['view'=>$view]);
     }
 
-    public function viewinfo($id){
+  
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //新增使用者的行程資料
+        print_r($request->input('uid'));
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //查看景點詳細內容
         $view = DB::table('views')->where('id', $id)->first();
         return view('gogoTaipei.viewinfo',['view'=>$view]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 }
