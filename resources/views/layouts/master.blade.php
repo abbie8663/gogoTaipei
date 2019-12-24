@@ -60,8 +60,8 @@
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li class="@yield('nav_home')"><a href="{{ route('home') }}"><span>Home</span></a></li>
-                <li class="@yield('nav_views')"><a href="{{ action('ViewController@index') }}"><span>Views</span></a></li>
-                <li class="@yield('nav_message')"><a href="{{ route('message') }}"><span>Message</span></a></li>
+                <li class="@yield('nav_views')"><a href="{{ route('views.index') }}"><span>Views</span></a></li>
+                <li class="@yield('nav_message')"><a href="{{ route('message.index') }}"><span>Message</span></a></li>
 
                 <!-- <li class="@yield('nav_Dropdown') has-children">
                   <a href="about.html"><span>Dropdown</span></a>

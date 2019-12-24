@@ -32,9 +32,12 @@ Route::get('/home', function () {
 Route::resource('views', 'ViewController');
 Route::post('/viewlist', 'ViewController@search')->name('search_viewlist');
 
+//我的行程
+Route::resource('schedule', 'ScheduleController');
+Route::post('schedule/{id}', 'ScheduleController@insert');
 
 //留言板
-Route::get('/message', 'MessageController@index')->name('message');
+Route::resource('message', 'MessageController');
 
 
 // Route::get('/viewinfo', function () {
