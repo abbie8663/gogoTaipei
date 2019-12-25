@@ -93,7 +93,7 @@
                     
                     <li><a href="#">會員資料</a></li>
                     <li><a href="#">我的珍藏</a></li>
-                    <li><a href="#">我的行程</a></li>
+                    <li><a href="{{ route('schedule.index') }}">我的行程</a></li>
                     <li>
                       <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
