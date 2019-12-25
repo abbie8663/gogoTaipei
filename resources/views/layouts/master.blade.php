@@ -90,7 +90,25 @@
                 <li class=" has-children">
                   <a href="#"><span>{{ Auth::user()->name }}</span></a>
                   <ul class="dropdown arrow-top">
-                    
+
+
+
+                    @can('admin')
+                    <!-- 系統管理者 -->
+                    <li><a href="#">會員管理</a></li>
+                    <li><a href="#">景點管理</a></li>
+                    <li><a href="#">留言板管理</a></li>
+                    <li>
+                      <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                      </a>
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                      </form>
+                    </li>
+                    @else
+                    <!-- 一般使用者 -->
                     <li><a href="#">會員資料</a></li>
                     <li><a href="#">我的珍藏</a></li>
                     <li><a href="{{ route('schedule.index') }}">我的行程</a></li>
@@ -103,6 +121,9 @@
                         @csrf
                       </form>
                     </li>
+                    @endcan
+
+
                   </ul>
                 </li>
                 @endguest
