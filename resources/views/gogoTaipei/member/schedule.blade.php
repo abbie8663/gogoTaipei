@@ -22,21 +22,95 @@
 <div class="site-section" data-aos="fade">
     <div class="container">
         <!-- 程式碼打在這裡 -->
-        <ul class="list-group">
-            @foreach($schedule as $row)
-            <li class="row list-group-item d-flex justify-content-between align-items-center">
-                <div class="col">
-                    {{$row->u_name}}
-                </div>
-                <div class="col">
-                    {{$row->v_name}}
+
+        <div class="row justify-content-center">
+            <div class="col-8"></div>
+            <div class="col-4">
+
+                <div class="row justify-content-center mb-3">
+                    <!-- <div class="col-md-10 mt-3 text-center border-primary"> -->
+                    <h2 class="font-weight-light text-primary">安排行程</h2>
+                    <!-- <p class="color-black-opacity-5">Lorem Ipsum Dolor Sit Amet</p> -->
+                    <!-- </div> -->
                 </div>
 
-            </li>
-            @endforeach
-        </ul>
+
+
+                @foreach($schedule as $row)
+                <div class="border p-3 rounded mb-2">
+                    <a data-toggle="collapse" href="#{{$row->vid}}" role="button" aria-expanded="false" aria-controls="collapse-1" class="accordion-item h5 d-block mb-0">{{$row->v_name}}</a>
+
+                    <div class="collapse" id="{{$row->vid}}">
+                        <div class="pt-2">
+                            <div class="form-row justify-content-center">
+                                <div class="col-md-10 mb-3">
+
+                                    <form class="needs-validation" action="{{ action('ScheduleController@update',$row->sid) }}" method="post" novalidate>
+                                        {{ csrf_field() }}
+
+                                        <div class="form-row mb-2">
+                                            <div class="col">
+                                                <label for="validationCustom01">Start Date</label>
+                                                <input type="datetime-local" class="form-control" id="validationCustom01" name="start_date" value="{{$row->start_date}}" required>
+                                                <div class="invalid-feedback">
+                                                    快輸入start_date
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <label for="validationCustom02">Start Date</label>
+                                                <input type="datetime-local" class="form-control" id="validationCustom02" name="end_date" value="{{$row->end_date}}" required>
+                                                <div class="invalid-feedback">
+                                                    你的end_date呢?
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a class="btn btn-primary btn-sm float-right ml-2 mt-3" href="{{ route('schedule.edit', $row->sid) }}" role="button">delete</a>
+                                        <!-- <button class="btn btn-primary btn-sm float-right ml-2 mt-3" >delete</button> -->
+                                        <button class="btn btn-primary btn-sm float-right mt-3" type="submit">edit</button>
+                                    </form>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                @endforeach
+            </div>
+
+        </div>
+
+
+
+
+
     </div>
 </div>
 
 
 @endsection
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>

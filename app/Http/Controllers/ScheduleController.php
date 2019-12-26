@@ -26,24 +26,25 @@ class ScheduleController extends Controller
         $schedule = DB::table('schedule')->where('uid', Auth::id())
             ->join('users', 'users.id', '=', 'schedule.uid')
             ->join('views', 'schedule.vid', '=', 'views.vid')
-            ->select('users.name as u_name','views.name as v_name')
+            ->select(
+                'schedule.sid as sid',
+                'users.name as u_name',
+                'views.vid as vid',
+                'views.name as v_name',
+                'schedule.start_date',
+                'schedule.end_date'
+            )
             ->get();
 
-   
+
 
         return view('gogoTaipei.member.schedule', ['schedule' => $schedule]);
     }
 
-    /**
-     * Insert the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function insert(Request $request, $vid)
     {
-        //新增我的行程
+        //新增行程
         $uid =  Auth::id();
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
@@ -51,6 +52,62 @@ class ScheduleController extends Controller
         print_r($request->input('start_date'));
         print_r($uid);
     }
+
+    public function update(Request $request, $sid)
+    {
+        //修改行程
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        DB::table('schedule')
+            ->where('sid', $sid)
+            ->update(['start_date' => $start_date, 'end_date' => $end_date]);
+        return redirect('schedule');
+    }
+
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($sid)
+    {
+        //刪除行程
+        print_r($sid);
+        DB::table('schedule')->where('sid', '=', $sid)->delete();
+        return redirect('schedule');
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    // public function update(Request $request, $sid)
+    // {
+    //     //修改行程
+    //     $start_date = $request->input('start_date');
+    //     $end_date = $request->input('end_date');
+
+    //     DB::table('schedule')
+    //         ->where('sid', $sid)
+    //         ->update(['start_date' => $start_date, 'end_date' => $end_date]);
+    // }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -72,14 +129,16 @@ class ScheduleController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $sid)
     {
         //
+       
     }
 
     /**
@@ -93,30 +152,9 @@ class ScheduleController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-        print_r($request->input('start_date'));
-        print_r($id);
-    }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -124,7 +162,7 @@ class ScheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($sid)
     {
         //
     }
