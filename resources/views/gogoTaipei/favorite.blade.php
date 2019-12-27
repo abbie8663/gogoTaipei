@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'Home')
-@section('nav_views', 'active')
+@section('nav_message', 'active')
 
 @section('content')
 
@@ -20,7 +20,7 @@
             <div class="col-md-10" data-aos="fade-up" data-aos-delay="400">
                 <div class="row justify-content-center">
                     <div class="col-md-8 text-center">
-                        <h1>viewlist</h1>
+                        <h1>收藏</h1>
                     </div>
                 </div>
             </div>
@@ -31,15 +31,9 @@
 
 <div class="site-section" data-aos="fade">
     <div class="container">
-        <!-- <div class="row justify-content-center mb-5">
-            <div class="col-md-7 text-center border-primary">
-                <h2 class="font-weight-light text-primary"></h2>
-                
-            </div>
-        </div> -->
-        <div class="row">
-            @foreach($view as $row)
-            <div class="col-md-6 mb-4 mb-lg-4 col-lg-4">
+    <div class="row">
+    @foreach($favorite as $row)
+    <div class="col-md-6 mb-4 mb-lg-4 col-lg-4">
                 <div class="listing-item">
                     <div class="listing-image">
                         <img src="images/img_1.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
@@ -52,17 +46,19 @@
                         <label class="collectLabel bookmark" data-viewid="{{$row->vid}}" data-toggle="tooltip" data-placement="left" title="收藏"><span class="icon-heart"></span></label>
                         @endif
 
-                        <h2 class="mb-1"><a href="{{action('ViewController@show',$row->vid)}}">{{$row->name}}</a></h2>
-                        <!-- <span class="address">West Orange, New York</span> -->
+                        <!-- 替代方案 @if($row->status == true)
+                        <a href="/favorite/destory/{{$row->id}}" class="collectLabel bookmark red"  data-viewid="{{$row->id}}" data-toggle="tooltip" data-placement="left" title="收藏"><span class="icon-heart"></span></a>
+                        @else
+                        <a href="/favorite/destory/{{$row->id}}" class="collectLabel bookmark" data-viewid="{{$row->id}}" data-toggle="tooltip" data-placement="left" title="收藏"><span class="icon-heart"></span></a>
+                        @endif  -->
+
+                        <!-- 原本 <a href="/favorite/destory/{{$row->id}}" class="bookmark" data-toggle="tooltip" data-placement="left" title="收藏"><span class="icon-heart"></span></a> -->
+                        <h2 class="mb-1"><a href="/viewinfo/{{$row->vid}}">{{$row->name}}</a></h2>
                     </div>
                 </div>
             </div>
-            @endforeach
-        </div>
-        <div class="row align-items-center justify-content-center">
-        {{ $view->links() }}
-        </div>
-       
+    @endforeach
+    </div>
     </div>
 </div>
 
@@ -89,6 +85,6 @@
             }
         });
     });
-</script>
+</script> 
 
-@endsection('content')
+@endsection

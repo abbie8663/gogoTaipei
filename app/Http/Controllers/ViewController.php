@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class ViewController extends Controller
 {
@@ -13,15 +16,33 @@ class ViewController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $view = DB::table('views')->paginate(15);
-        return view('gogoTaipei.viewlist',['view'=>$view]);
+        $views = DB::table('views')->paginate(15);
+
+        $user_id = Auth::id();
+
+        $favorite = DB::table('favorite')
+        ->join('views', 'favorite.Vid', '=', 'views.vid')
+        ->where('Uid', $user_id)
+        ->get();
+
+                
+        foreach($views as $row){
+            $row->status = false;
+            foreach($favorite as $rew){
+                if($row->vid==$rew->Vid){
+                    $row->status = true;
+                }
+            }
+        }
+
+        return view('gogoTaipei.viewlist',['view'=>$views]);
     }
 
     public function search(Request $request)
     {//搜尋景點
         $search = $request->input('search');
       
-        $view = DB::table('views')->where('id', 'like', '%'.$search.'%')
+        $views = DB::table('views')->where('vid', 'like', '%'.$search.'%')
         ->orwhere('name', 'like', '%'.$search.'%')
         ->orwhere('description', 'like', '%'.$search.'%')
         ->orwhere('tel', 'like', '%'.$search.'%')
@@ -31,10 +52,35 @@ class ViewController extends Controller
         ->orwhere('px', 'like', '%'.$search.'%')
         ->orwhere('py', 'like', '%'.$search.'%')
         ->paginate(15);
+        
+        //判斷哪些該亮愛心
+        $user_id = Auth::id();
 
-        return view('gogoTaipei.viewlist',['view'=>$view]);
+        $favorite = DB::table('favorite')
+        ->join('views', 'favorite.Vid', '=', 'views.vid')
+        ->where('Uid', $user_id)
+        ->get();
+
+        foreach($views as $row){
+            $row->status = false;
+
+            foreach($favorite as $rew){
+                if($row->vid==$rew->Vid){
+                    $row->status = true;
+                }
+            }
+        }
+
+        return view('gogoTaipei.viewlist',['view'=>$views]);
     }
 
+
+
+
+
+
+
+    
   
     /**
      * Show the form for creating a new resource.
@@ -46,16 +92,24 @@ class ViewController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
+    // /**
+    //  * Store a newly created resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @return \Illuminate\Http\Response
+    //  */
+     /**
+     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //新增使用者的行程資料
-        print_r($request->input('uid'));
+        print_r($request->input('start_date'));
+        // print_r($id);
 
     }
 
@@ -68,7 +122,7 @@ class ViewController extends Controller
     public function show($id)
     {
         //查看景點詳細內容
-        $view = DB::table('views')->where('id', $id)->first();
+        $view = DB::table('views')->where('vid', $id)->first();
         return view('gogoTaipei.viewinfo',['view'=>$view]);
     }
 
@@ -93,6 +147,9 @@ class ViewController extends Controller
     public function update(Request $request, $id)
     {
         //
+        //新增使用者的行程資料
+        print_r($request->input('start_date'));
+        print_r($id);
     }
 
     /**

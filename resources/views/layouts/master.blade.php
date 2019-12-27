@@ -9,6 +9,7 @@
   <meta name="description" content="" />
   <meta name="keywords" content="" />
   <meta name="author" content="Free-Template.co" />
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <link rel="shortcut icon" href="ftco-32x32.png">
 
@@ -30,6 +31,7 @@
   <link rel="stylesheet" href="{{ asset('css/rangeslider.css')}}">
 
   <link rel="stylesheet" href="{{ asset('css/style.css')}}">
+  <script src="{{ asset('js/jquery-3.3.1.min.js')}}"></script>
 
 </head>
 
@@ -110,7 +112,7 @@
                     @else
                     <!-- 一般使用者 -->
                     <li><a href="#">會員資料</a></li>
-                    <li><a href="#">我的珍藏</a></li>
+                    <li><a href="{{ route('favorite') }}">我的珍藏</a></li>
                     <li><a href="{{ route('schedule.index') }}">我的行程</a></li>
                     <li>
                       <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
