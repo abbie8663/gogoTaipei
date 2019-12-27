@@ -22,7 +22,7 @@ class AdminController extends Controller
         // $view = view::all()->paginate(10);
         // return view("admin.viewlist.index")->with("view",$view);
         $view = DB::table('views')->paginate(10);
-        return view('gogoTaipei.backend.viewlist', ['view' => $view]);
+        return view('gogoTaipei.backend.viewlist', ['view' => $view,'search'=>'NULL']);
     }
 
     public function search(Request $request)
@@ -38,7 +38,7 @@ class AdminController extends Controller
             ->orwhere('px', 'like', '%' . $search . '%')
             ->orwhere('py', 'like', '%' . $search . '%')
             ->paginate(10);
-        return view('gogoTaipei.backend.viewlist', ['view' => $view]);
+        return view('gogoTaipei.backend.viewlist', ['view' => $view,'search'=>$search]);
     }
 
 

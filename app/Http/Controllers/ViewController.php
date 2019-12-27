@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-
+use Illuminate\Pagination\Paginator;
 
 class ViewController extends Controller
 {
@@ -35,7 +35,7 @@ class ViewController extends Controller
             }
         }
 
-        return view('gogoTaipei.viewlist',['view'=>$views]);
+        return view('gogoTaipei.viewlist',['view'=>$views,'search'=>'NULL']);
     }
 
     public function search(Request $request)
@@ -71,7 +71,7 @@ class ViewController extends Controller
             }
         }
 
-        return view('gogoTaipei.viewlist',['view'=>$views]);
+        return view('gogoTaipei.viewlist',['view'=>$views,'search'=>$search]);
     }
 
 
