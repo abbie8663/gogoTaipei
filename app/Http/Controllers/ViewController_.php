@@ -33,7 +33,7 @@ class ViewController extends Controller
     {
         $search = $request->input('search');
       
-        $view = DB::table('views')->where('id', 'like', '%'.$search.'%')
+        $view = DB::table('views')->where('vid', 'like', '%'.$search.'%')
         ->orwhere('name', 'like', '%'.$search.'%')
         ->orwhere('description', 'like', '%'.$search.'%')
         ->orwhere('tel', 'like', '%'.$search.'%')
@@ -47,8 +47,8 @@ class ViewController extends Controller
         return view('gogoTaipei.viewlist',['view'=>$view]);
     }
 
-    public function viewinfo($id){
-        $view = DB::table('views')->where('id', $id)->first();
+    public function viewinfo($vid){
+        $view = DB::table('views')->where('vid', $vid)->first();
         return view('gogoTaipei.viewinfo',['view'=>$view]);
     }
 }
