@@ -98,7 +98,7 @@
                     @can('admin')
                     <!-- 系統管理者 -->
                     <li><a href="#">會員管理</a></li>
-                    <li><a href="#">景點管理</a></li>
+                    <li><a href="{{ route('admin.viewlist.index') }}">景點管理</a></li>
                     <li><a href="#">留言板管理</a></li>
                     <li>
                       <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
