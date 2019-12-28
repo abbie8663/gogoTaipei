@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 class MessageController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -13,10 +18,29 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
-        // $view = DB::table('views')->paginate(15);
-        // return view('gogoTaipei.viewlist',['view'=>$view]);
-        return view('gogoTaipei.message');
+            $message=DB::table('message')
+            ->join('users', 'users.id', '=', 'message.uid')
+            ->select('users.name as name', 'message.*')
+            ->orderBy('m_id','DESC')
+            ->paginate(5);
+        
+           
+        return view('gogoTaipei.message',['message'=>$message]);
+       
+    }
+
+    public function index1()
+    {
+            $message=DB::table('message')
+            ->join('users', 'users.id', '=', 'message.uid')
+            ->select('users.name as name', 'message.*')
+            ->orderBy('m_id','DESC')
+            ->paginate(5);
+        
+           
+        return view('gogoTaipei.deletemessage',['message'=>$message]);
+        //return view('gogoTaipei.deletemessage', array('message'=>$message));
+       
     }
 
     /**
@@ -33,11 +57,23 @@ class MessageController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $this->middleware('auth');
+        $u_mail =  Auth::id();
+        $title = $request->input('title');
+        $date=$request->input('date');
+        $content = $request->input('content');
+        // $u_mail = auth()->user()->id;
+      
+
+        DB::insert('insert into message (title,date,content,uid)
+    values (?,?,?,?)',[$title,$date,$content,$u_mail]);
+     return redirect()->action('MessageController@index');
+        // return redirect()->refresh();
     }
 
     /**
@@ -61,7 +97,16 @@ class MessageController extends Controller
     {
         //
     }
-
+    public function delete()
+    {$this->middleware('auth');
+        $check = $_POST['checkbox'];
+        foreach ($check as $m_id) {
+             DB::table('message')->where("m_id",$m_id)->delete();  
+        }
+        return redirect('deletemessage');
+    
+    }
+    
     /**
      * Update the specified resource in storage.
      *
@@ -80,8 +125,22 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-        //
+       
+    
     }
+    public function search(Request $request)
+    {
+        $search=$request->input('search');
+       
+            $message = DB::table('message')->where('title', 'like', '%'.$search.'%')
+            ->join('users', 'users.id', '=', 'message.uid')
+            ->select('users.name as name', 'message.*')
+            ->orderBy('m_id','DESC')
+            ->paginate(5);
+            return view('gogoTaipei.message',['message'=>$message]);
+      
+    }
+   
 }
