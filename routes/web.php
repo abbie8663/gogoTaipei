@@ -36,6 +36,7 @@ Route::get('/viewlist', 'ViewController@search')->name('search_viewlist');
 Route::resource('schedule', 'ScheduleController');
 Route::post('schedule/insert/{id}', 'ScheduleController@insert');
 Route::post('schedule/update/{id}', 'ScheduleController@update');
+Route::post('schedule/date', 'ScheduleController@show_date')->name('schedule_date');
 
 
 // //留言板

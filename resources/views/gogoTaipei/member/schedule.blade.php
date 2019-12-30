@@ -19,13 +19,49 @@
 </div>
 
 
-<div class="site-section" data-aos="fade">
+<div class="site-section">
     <div class="container">
         <!-- 程式碼打在這裡 -->
 
         <div class="row justify-content-center">
-            <div class="col-8"></div>
+            <div class="col-8">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+                    選擇出發日期
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <form class="form-group needs-validation" action="{{ action('ScheduleController@show_date') }}" method="post" novalidate>
+                                {{ csrf_field() }}
+                           
+                                <div class="modal-body">
+                                    <input class="form-control" type="date" name="date" required>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button  class="btn btn-primary" type="submit" >Save changes</button>
+                                </div>
+
+                            </form>
+
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-4">
+
+                
 
                 <div class="row justify-content-center mb-3">
                     <!-- <div class="col-md-10 mt-3 text-center border-primary"> -->
@@ -59,7 +95,7 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
-                                                <label for="validationCustom02">Start Date</label>
+                                                <label for="validationCustom02">End Date</label>
                                                 <input type="datetime-local" class="form-control" id="validationCustom02" name="end_date" value="{{$row->end_date}}" required>
                                                 <div class="invalid-feedback">
                                                     你的end_date呢?

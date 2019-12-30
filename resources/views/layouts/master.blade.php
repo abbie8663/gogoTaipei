@@ -97,7 +97,6 @@
 
                     @can('admin')
                     <!-- 系統管理者 -->
-                    <li><a href="#">會員管理</a></li>
                     <li><a href="{{ route('admin.viewlist.index') }}">景點管理</a></li>
                     <li><a href="{{ route('delete_message') }}">留言板管理</a></li>
                     <li>
