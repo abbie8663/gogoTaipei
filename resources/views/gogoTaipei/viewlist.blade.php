@@ -6,10 +6,11 @@
 @section('content')
 
 <style>
-    .collectLabel{
+    .collectLabel {
         cursor: pointer;
     }
-    .red{
+
+    .red {
         background: #f23a2e !important;
     }
 </style>
@@ -42,12 +43,12 @@
             <div class="col-md-6 mb-4 mb-lg-4 col-lg-4">
                 <div class="listing-item">
                     <div class="listing-image">
-                        <img src="images/img_1.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
+                        <img src="/images/pic/{{$row->vid}}.jpg" onerror="this.src='/images/default_.jpg'" class="img-fluid">
                     </div>
                     <div class="listing-item-content">
 
                         @if($row->status == true)
-                        <label class="collectLabel bookmark red"  data-viewid="{{$row->vid}}" data-toggle="tooltip" data-placement="left" title="收藏"><span class="icon-heart"></span></label>
+                        <label class="collectLabel bookmark red" data-viewid="{{$row->vid}}" data-toggle="tooltip" data-placement="left" title="收藏"><span class="icon-heart"></span></label>
                         @else
                         <label class="collectLabel bookmark" data-viewid="{{$row->vid}}" data-toggle="tooltip" data-placement="left" title="收藏"><span class="icon-heart"></span></label>
                         @endif
@@ -59,15 +60,21 @@
             </div>
             @endforeach
         </div>
+
+        
         <div class="row align-items-center justify-content-center">
-        {{ $view->links() }}
+            @if($search != 'NULL' )
+            {{ $view->appends(['search' =>$search])->render()  }}
+            @else
+            {{ $view->render()  }}
+            @endif
         </div>
-       
+
     </div>
 </div>
 
 <script>
-    $(document).on("click", ".collectLabel", function(){
+    $(document).on("click", ".collectLabel", function() {
         console.log("click");
         var viewid = $(this).data("viewid");
         var currentLabel = $(this);
@@ -80,9 +87,9 @@
             data: {
                 'viewid': viewid
             },
-            success: function(reponse){
-                console.log("收藏: "+viewid);
-                console.log("THIS: "+$(this));
+            success: function(reponse) {
+                console.log("收藏: " + viewid);
+                console.log("THIS: " + $(this));
                 currentLabel.toggleClass("red");
                 //var div;
                 //div.delete();
