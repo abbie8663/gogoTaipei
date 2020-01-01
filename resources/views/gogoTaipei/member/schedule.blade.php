@@ -1,6 +1,13 @@
 @extends('layouts.master')
 
 @section('title', 'Home')
+@section('map')
+
+<script type='text/javascript'>
+    var centreGot = false;
+</script>
+{!! $map['js'] !!}
+@endsection
 
 
 @section('content')
@@ -20,15 +27,31 @@
 
 
 <div class="site-section">
-    <div class="container">
+    <!-- <div class="container"> -->
         <!-- 程式碼打在這裡 -->
 
-        <div class="row justify-content-center">
-            <div class="col-8">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+        <div class="row mr-0 ml-0">
+            <div class='col-1'></div>
+            <div class="col-7">
+                {!! $map['html'] !!}
+            </div>
+            <div class="col-3 ">
+
+
+
+                <div class="row justify-content-center mb-3">
+                    <!-- <div class="col-md-10 mt-3 text-center border-primary"> -->
+                    <h2 class="font-weight-light text-primary">安排行程</h2>
+                    <!-- <p class="color-black-opacity-5">Lorem Ipsum Dolor Sit Amet</p> -->
+                    <!-- </div> -->
+                </div>
+
+ 
+                 <!-- Button trigger modal -->
+                 <button type="button" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal">
                     選擇出發日期
                 </button>
+     
 
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -43,33 +66,21 @@
 
                             <form class="form-group needs-validation" action="{{ action('ScheduleController@date') }}" method="post" novalidate>
                                 {{ csrf_field() }}
-                           
+
                                 <div class="modal-body">
                                     <input class="form-control" type="date" name="date" required>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button  class="btn btn-primary" type="submit" >Save changes</button>
+                                    <button class="btn btn-primary" type="submit">Save changes</button>
                                 </div>
 
                             </form>
 
-                           
+
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-4">
-
-                
-
-                <div class="row justify-content-center mb-3">
-                    <!-- <div class="col-md-10 mt-3 text-center border-primary"> -->
-                    <h2 class="font-weight-light text-primary">安排行程</h2>
-                    <!-- <p class="color-black-opacity-5">Lorem Ipsum Dolor Sit Amet</p> -->
-                    <!-- </div> -->
-                </div>
-
 
 
                 @foreach($schedule as $row)
@@ -117,14 +128,9 @@
 
                 @endforeach
             </div>
-
+            <!-- <div class='col-1'></div> -->
         </div>
 
-
-
-
-
-    </div>
 </div>
 
 

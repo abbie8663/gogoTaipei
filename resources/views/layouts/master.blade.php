@@ -33,6 +33,8 @@
   <link rel="stylesheet" href="{{ asset('css/style.css')}}">
   <script src="{{ asset('js/jquery-3.3.1.min.js')}}"></script>
 
+  @yield('map')
+
 </head>
 
 <body>
@@ -65,7 +67,7 @@
                 <li class="@yield('nav_views')"><a href="{{ route('views.index') }}"><span>Views</span></a></li>
                 <li class="@yield('nav_message')"><a href="{{ route('message.index') }}"><span>Message</span></a></li>
 
-               
+
                 @guest
                 <li><a href="{{ route('login') }}"><span>{{ __('Login') }}</span></a></li>
                 @if (Route::has('register'))
