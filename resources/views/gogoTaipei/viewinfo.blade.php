@@ -39,7 +39,7 @@
 
         <div class="row ">
             <div class="col-md-4">
-            <img src="/images/pic/{{$row->vid}}.jpg" onerror="this.src='/images/default_.jpg'"  class="img-fluid rounded">
+            <img src="/images/pic/{{$view->vid}}.jpg" onerror="this.src='/images/default_.jpg'"  class="img-fluid rounded">
             </div>
             <div class="col-md-7 ml-auto">
                 <!-- <h2 class="text-primary mb-3"></h2> -->
