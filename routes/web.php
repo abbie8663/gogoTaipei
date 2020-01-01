@@ -11,16 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/master', function () {
     return view('layouts.master');
 });
 
 
-
+Route::get('/', function () {
+    return view('gogoTaipei.index');
+});
 
 
 
@@ -33,25 +35,25 @@ Route::resource('views', 'ViewController');
 Route::get('/viewlist', 'ViewController@search')->name('search_viewlist');
 
 //我的行程
-Route::resource('schedule', 'ScheduleController');
-Route::post('schedule/insert/{id}', 'ScheduleController@insert');
-Route::post('schedule/update/{id}', 'ScheduleController@update');
-Route::post('schedule/date', 'ScheduleController@show_date')->name('schedule_date');
+Route::get('/schedule', 'ScheduleController@index')->name('schedule.index');
+Route::post('/schedule/date', 'ScheduleController@date')->name('schedule_date');//取得日期
+Route::get('/schedule/{date}', 'ScheduleController@index_d')->name('schedule.date');//顯示日期
+// Route::resource('schedule', 'ScheduleController');
+Route::post('/schedule/insert/{id}', 'ScheduleController@insert')->name('schedule.insert');
+Route::post('/schedule/edit/{id}', 'ScheduleController@edit')->name('schedule.edit');
+Route::get('/schedule/delete/{id}', 'ScheduleController@delete')->name('schedule.delete');
 
 
-// //留言板
-// Route::resource('message', 'MessageController');
-// Route::post('message/search', 'MessageController@search');
+// Route::get('schedule/{date}', 'ScheduleController@show_date')->name('schedule_date');
+
 
 //留言板
-Route::resource('message', 'MessageController');
-Route::post('message','MessageController@store')->name('store')->middleware('auth');
-Route::post('message/search', 'MessageController@search')->name('search');
-Route::get('deletemessage', 'MessageController@index1')->name('delete_message')->middleware('auth');
-Route::post('deletemessage', 'MessageController@delete')->name('delete');
+Route::resource('/message', 'MessageController');
+Route::post('/message','MessageController@store')->name('store')->middleware('auth');
+Route::post('/message/search', 'MessageController@search')->name('search');
+Route::get('/deletemessage', 'MessageController@index1')->name('delete_message')->middleware('auth');
+Route::post('/deletemessage', 'MessageController@delete')->name('delete');
 
-// Route::post('message/insert', 'MessageController@insert')->middleware('auth');
-// Route::gett('message/delete', 'MessageController@delete')->middleware('auth');
 
 //收藏
 Route::get('/favorite', 'FavoriteController@index')->name('favorite');
@@ -72,16 +74,5 @@ Route::post('/admin/vl', 'AdminController@insert')->name('admin.viewlist.insert'
 //在Route最後加上這條 ->middleware('auth');
 
 
-// Route::get('/viewinfo', function () {
-//     return view('gogoTaipei.viewinfo');
-// })->name('viewinfo');
-
-
-
-
-
-
 
 Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');

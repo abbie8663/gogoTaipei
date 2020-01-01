@@ -41,7 +41,7 @@
                                 </button>
                             </div>
 
-                            <form class="form-group needs-validation" action="{{ action('ScheduleController@show_date') }}" method="post" novalidate>
+                            <form class="form-group needs-validation" action="{{ action('ScheduleController@date') }}" method="post" novalidate>
                                 {{ csrf_field() }}
                            
                                 <div class="modal-body">
@@ -81,7 +81,7 @@
                             <div class="form-row justify-content-center">
                                 <div class="col-md-10 mb-3">
 
-                                    <form class="needs-validation" action="{{ action('ScheduleController@update',$row->sid) }}" method="post" novalidate>
+                                    <form class="needs-validation" action="{{ action('ScheduleController@edit',$row->sid) }}" method="post" novalidate>
                                         {{ csrf_field() }}
 
                                         <div class="form-row mb-2">
@@ -102,7 +102,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <a class="btn btn-primary btn-sm float-right ml-2 mt-3" href="{{ route('schedule.edit', $row->sid) }}" role="button">delete</a>
+                                        <a class="btn btn-primary btn-sm float-right ml-2 mt-3" href="/schedule/delete/{{$row->sid}}" role="button">delete</a>
                                         <!-- <button class="btn btn-primary btn-sm float-right ml-2 mt-3" >delete</button> -->
                                         <button class="btn btn-primary btn-sm float-right mt-3" type="submit">edit</button>
                                     </form>
