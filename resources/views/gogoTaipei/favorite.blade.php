@@ -1,8 +1,6 @@
 @extends('layouts.master')
 
 @section('title', 'Home')
-@section('nav_message', 'active')
-
 @section('content')
 
 <style>
@@ -36,7 +34,7 @@
     <div class="col-md-6 mb-4 mb-lg-4 col-lg-4">
                 <div class="listing-item">
                     <div class="listing-image">
-                        <img src="images/img_1.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
+                    <img src="/images/pic/{{$row->vid}}.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
                     </div>
                     <div class="listing-item-content">
 
@@ -53,7 +51,7 @@
                         @endif  -->
 
                         <!-- 原本 <a href="/favorite/destory/{{$row->id}}" class="bookmark" data-toggle="tooltip" data-placement="left" title="收藏"><span class="icon-heart"></span></a> -->
-                        <h2 class="mb-1"><a href="/viewinfo/{{$row->vid}}">{{$row->name}}</a></h2>
+                        <h2 class="mb-1"><a href="/views/{{$row->vid}}">{{$row->name}}</a></h2>
                     </div>
                 </div>
             </div>
