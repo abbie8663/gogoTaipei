@@ -65,23 +65,7 @@
                 <li class="@yield('nav_views')"><a href="{{ route('views.index') }}"><span>Views</span></a></li>
                 <li class="@yield('nav_message')"><a href="{{ route('message.index') }}"><span>Message</span></a></li>
 
-                <!-- <li class="@yield('nav_Dropdown') has-children">
-                  <a href="about.html"><span>Dropdown</span></a>
-                  <ul class="dropdown arrow-top">
-                    <li><a href="#">Menu One</a></li>
-                    <li><a href="#">Menu Two</a></li>
-                    <li><a href="#">Menu Three</a></li>
-                    <li class="has-children">
-                      <a href="#">Dropdown</a>
-                      <ul class="dropdown">
-                        <li><a href="#">Menu One</a></li>
-                        <li><a href="#">Menu Two</a></li>
-                        <li><a href="#">Menu Three</a></li>
-                        <li><a href="#">Menu Four</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li> -->
+               
                 @guest
                 <li><a href="{{ route('login') }}"><span>{{ __('Login') }}</span></a></li>
                 @if (Route::has('register'))
@@ -123,19 +107,13 @@
                       </form>
                     </li>
                     @endcan
-
-
                   </ul>
                 </li>
                 @endguest
-
-
-
               </ul>
             </nav>
           </div>
-
-
+          
           <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
 
         </div>
@@ -192,7 +170,6 @@
     });
   </script>
 
-  <script src="{{ asset('js/main.js')}}"></script>
 
 </body>
 
