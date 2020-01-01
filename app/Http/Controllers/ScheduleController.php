@@ -20,7 +20,7 @@ class ScheduleController extends Controller
         //顯示 我的行程
 
         $today = date("Y-m-d", mktime(date('H') + 8, date('i'), date('s'), date('m'), date('d'), date('Y')));
-        print_r($today);
+        // print_r($today);
         // $thisday = '2017-04-20';
         // if(strtotime($today)>strtotime($thisday))
 
@@ -115,3 +115,4 @@ class ScheduleController extends Controller
         DB::table('schedule')->where('sid', '=', $sid)->delete();
         return redirect()->back();
     }
+}

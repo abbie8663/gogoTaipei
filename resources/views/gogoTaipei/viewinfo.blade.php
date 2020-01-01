@@ -22,9 +22,24 @@
 
 <div class="site-section">
     <div class="container">
+
+
+        @if (session('message'))
+        <div class="alert alert-warning">
+            {{ session('message') }}
+        </div>
+        @elseif (session('alert'))
+        <div class="alert alert-primary">
+            {{ session('alert') }}
+        </div>
+        @endif
+
+        
+
+
         <div class="row ">
             <div class="col-md-4">
-                <img src="/images/img_1.jpg" alt="Free website template by Free-Template.co" class="img-fluid rounded">
+            <img src="/images/pic/{{$row->vid}}.jpg" onerror="this.src='/images/default_.jpg'"  class="img-fluid rounded">
             </div>
             <div class="col-md-7 ml-auto">
                 <!-- <h2 class="text-primary mb-3"></h2> -->
@@ -33,10 +48,8 @@
                 <div class="mb-3">{{$view->opentime}}</div>
                 <p class="mb-4">{{$view->description}}</p>
 
-                <form class="form-group" action="{{ route('views.store') }}" method="post">
+                <form class="form-group needs-validation" action="{{ action('ScheduleController@insert',$view->vid) }}" method="post" novalidate>
                     {{ csrf_field() }}
-                    <input type="hidden" name="uid" value="{{Auth::user()->id}}">
-                    <input type="hidden" name="vid" value="{{$view->id}}">
 
 
                     <div class="form-row">
@@ -50,11 +63,17 @@
 
                     <div class="form-row">
                         <div class="col-5">
-                            <input class="form-control" type="datetime-local" name="start_date">
+                            <input class="form-control" type="datetime-local" name="start_date" required>
+                            <div class="invalid-feedback">
+                                Please choose your beginning day.
+                            </div>
                         </div>
 
                         <div class="col-5">
-                            <input class="form-control" type="datetime-local" name="end_date">
+                            <input class="form-control" type="datetime-local" name="end_date" required>
+                            <div class="invalid-feedback">
+                                Please choose your ending day.
+                            </div>
                         </div>
                         <div class="col-2">
                             <button type="submit" class="btn btn-primary  ">確認</button>
@@ -74,5 +93,24 @@
         </div>
     </div>
 </div>
-
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 @endsection

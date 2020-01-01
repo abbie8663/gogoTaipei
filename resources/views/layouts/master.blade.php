@@ -94,7 +94,7 @@
                     </li>
                     @else
                     <!-- 一般使用者 -->
-                    <li><a href="#">會員資料</a></li>
+                    <!-- <li><a href="#">會員資料</a></li> -->
                     <li><a href="{{ route('favorite') }}">我的珍藏</a></li>
                     <li><a href="{{ route('schedule.index') }}">我的行程</a></li>
                     <li>
@@ -113,7 +113,7 @@
               </ul>
             </nav>
           </div>
-          
+
           <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
 
         </div>
