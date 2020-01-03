@@ -63,9 +63,9 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li class="@yield('nav_home')"><a href="{{ route('home') }}"><span>Home</span></a></li>
-                <li class="@yield('nav_views')"><a href="{{ route('views.index') }}"><span>Views</span></a></li>
-                <li class="@yield('nav_message')"><a href="{{ route('message.index') }}"><span>Message</span></a></li>
+                <li class="@yield('nav_home')"><a href="{{ route('home') }}"><span>首頁</span></a></li>
+                <li class="@yield('nav_views')"><a href="{{ route('views.index') }}"><span>景點</span></a></li>
+                <li class="@yield('nav_message')"><a href="{{ route('message.index') }}"><span>留言板</span></a></li>
 
 
                 @guest
@@ -134,7 +134,8 @@
         <div class="col-12 text-md-center text-left">
           <p>
             <!-- Link back to Free-Template.co can't be removed. Template is licensed under CC BY 3.0. -->
-            &copy; 2019 <strong class="text-black">Browse</strong> Free Template. All Rights Reserved. <br> Design by <a href="https://free-template.co/" target="_blank" class="text-black">Free-Template.co</a>
+            <!-- &copy; 2019 <strong class="text-black">Browse</strong> Free Template. All Rights Reserved. <br> Design by <a href="https://free-template.co/" target="_blank" class="text-black">Free-Template.co</a> -->
+          <!-- 2019 第七組 -->
           </p>
         </div>
       </div>

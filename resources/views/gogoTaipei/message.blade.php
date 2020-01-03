@@ -47,7 +47,11 @@
         <div class="h-entry">
           <div class="h-entry-inner">
             @foreach ($message as $data)<h2 class="font-size-regular">
-              <span class="mx-2">&bullet;</span>{{$data->title}}<span class="mx-2">&bullet;</span> {{$data->date}}</h2>
+              @php
+              $time = strtotime($data->created_at);
+              $created_at = date("Y-m-d", $time);
+              @endphp
+              <span class="mx-2">&bullet;</span>{{$data->title}}<span class="mx-2">&bullet;</span> {{$created_at}}</h2>
             <h2 class="font-size-regular"><a href="#l">&nbsp;&nbsp;&nbsp;&nbsp;{{$data->name}}</a></h2>
             <p>&nbsp;&nbsp;&nbsp;&nbsp;{{$data->content}}</p>
             <hr> @endforeach
@@ -73,12 +77,12 @@
             </div>
           </div>
 
-          <div class="row form-group">
+          <!-- <div class="row form-group">
             <div class="col-md-12">
               <label class="text-black" for="date">日期</label><br>
               <input type="date" name="date" placeholder="2014-09-18">
             </div>
-          </div>
+          </div> -->
 
           <div class="row form-group">
             <div class="col-md-12">

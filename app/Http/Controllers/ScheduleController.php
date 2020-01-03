@@ -42,11 +42,29 @@ class ScheduleController extends Controller
             ->orderBy('start_', 'asc')
             ->get();
 
+        if ($schedule->isEmpty()) {
+            $config = array();
+            $config['map_height'] = "500px";
+            $config['center'] = "new taipei, taiwan";
+            $config['zoom'] = '15';
 
+            $config['onboundschanged'] = 'if (!centreGot) {
+                    var mapCentre = map.getCenter();
+                    marker_0.setOptions({
+                        position: new google.maps.LatLng(mapCentre.lat(), mapCentre.lng())
+                    });
+                }
+                centreGot = true;';
+            $this->gmap->initialize($config); // Initialize Map with custom configuration
+            // set up the marker ready for positioning
+            $map = $this->gmap->create_map();
+
+            return view('gogoTaipei.member.schedule', ['schedule' => $schedule, 'map' => $map]);
+        }
         /******** End Controls ********/
         // foreach ($schedule as $row) {
         //     print_r($row->px);
-        //     // print_r($schedule->py);
+        // print_r($schedule);
 
         //     print_r('FK');
         // }
@@ -89,6 +107,7 @@ class ScheduleController extends Controller
         foreach ($schedule as $row) {
             $marker = array();
             $marker['position'] = "$row->py, $row->px";
+            $marker['infowindow_content'] = "$row->py, $row->px";
             $marker['draggable'] = false;
             $marker['ondragend'] = '
         iw_' . $this->gmap->map_name . '.close();
@@ -125,11 +144,6 @@ class ScheduleController extends Controller
     {
         //顯示今天 我的行程
 
-        $today = date("Y-m-d", mktime(date('H') + 8, date('i'), date('s'), date('m'), date('d'), date('Y')));
-        print_r($today);
-        // $thisday = '2017-04-20';
-        // if(strtotime($today)>strtotime($thisday))
-
         $schedule = DB::table('schedule')->where('uid', Auth::id())->where('start', $date)
             ->join('users', 'users.id', '=', 'schedule.uid')
             ->join('views', 'schedule.vid', '=', 'views.vid')
@@ -138,13 +152,91 @@ class ScheduleController extends Controller
                 'users.name as u_name',
                 'views.vid as vid',
                 'views.name as v_name',
+                'views.px as px',
+                'views.py as py',
                 'schedule.start_date',
                 'schedule.end_date'
             )
             ->orderBy('start_', 'asc')
             ->get();
 
-        return view('gogoTaipei.member.schedule', ['schedule' => $schedule]);
+        if ($schedule->isEmpty()) {
+            $config = array();
+            $config['map_height'] = "500px";
+            $config['center'] = "new taipei, taiwan";
+            $config['zoom'] = '15';
+
+            $config['onboundschanged'] = 'if (!centreGot) {
+                var mapCentre = map.getCenter();
+                marker_0.setOptions({
+                    position: new google.maps.LatLng(mapCentre.lat(), mapCentre.lng())
+                });
+            }
+            centreGot = true;';
+            $this->gmap->initialize($config); // Initialize Map with custom configuration
+            // set up the marker ready for positioning
+            $map = $this->gmap->create_map();
+
+            return view('gogoTaipei.member.schedule', ['schedule' => $schedule, 'map' => $map]);
+        }
+
+
+        $center_px = $schedule[0]->px;
+        $center_py = $schedule[0]->py;
+
+
+        $config = array();
+        $config['map_height'] = "500px";
+        $config['center'] = "$center_py, $center_px";
+        $config['zoom'] = '15';
+
+        $config['onboundschanged'] = 'if (!centreGot) {
+                var mapCentre = map.getCenter();
+                marker_0.setOptions({
+                    position: new google.maps.LatLng(mapCentre.lat(), mapCentre.lng())
+                });
+            }
+            centreGot = true;';
+        $this->gmap->initialize($config); // Initialize Map with custom configuration
+        // set up the marker ready for positioning
+
+        /******** marker ********/
+        // $marker = array();
+        // $marker['position'] = "$schedule->py, $schedule->px";
+        // $marker['draggable'] = false;
+        // $marker['ondragend'] = '
+        // iw_' . $this->gmap->map_name . '.close();
+        // reverseGeocode(event.latLng, function(status, result, mark){
+        //     if(status == 200){
+        //         iw_' . $this->gmap->map_name . '.setContent(result);
+        //         iw_' . $this->gmap->map_name . '.open(' . $this->gmap->map_name . ', mark);
+        //     }
+        // }, this);
+        // ';
+
+        // $this->gmap->add_marker($marker);
+
+        /******** foreach  marker ********/
+        foreach ($schedule as $row) {
+            $marker = array();
+            $marker['position'] = "$row->py, $row->px";
+            $marker['infowindow_content'] = "$row->py, $row->px";
+            $marker['draggable'] = false;
+            $marker['ondragend'] = '
+            iw_' . $this->gmap->map_name . '.close();
+            reverseGeocode(event.latLng, function(status, result, mark){
+                if(status == 200){
+                    iw_' . $this->gmap->map_name . '.setContent(result);
+                    iw_' . $this->gmap->map_name . '.open(' . $this->gmap->map_name . ', mark);
+                }
+            }, this);
+            ';
+
+            $this->gmap->add_marker($marker);
+        }
+
+        $map = $this->gmap->create_map(); // This object will render javascript files and map view; you can call JS by $map['js'] and map view by $map['html']
+        return view('gogoTaipei.member.schedule', ['schedule' => $schedule, 'map' => $map]);
     }
 
 

@@ -21,7 +21,7 @@ class MessageController extends Controller
             $message=DB::table('message')
             ->join('users', 'users.id', '=', 'message.uid')
             ->select('users.name as name', 'message.*')
-            ->orderBy('m_id','DESC')
+            ->orderBy('created_at','DESC')
             ->paginate(5);
         
            
@@ -34,7 +34,7 @@ class MessageController extends Controller
             $message=DB::table('message')
             ->join('users', 'users.id', '=', 'message.uid')
             ->select('users.name as name', 'message.*')
-            ->orderBy('m_id','DESC')
+            ->orderBy('created_at','DESC')
             ->paginate(5);
         
            
@@ -65,13 +65,13 @@ class MessageController extends Controller
         $this->middleware('auth');
         $u_mail =  Auth::id();
         $title = $request->input('title');
-        $date=$request->input('date');
+        // $date=$request->input('date');
         $content = $request->input('content');
         // $u_mail = auth()->user()->id;
       
 
-        DB::insert('insert into message (title,date,content,uid)
-    values (?,?,?,?)',[$title,$date,$content,$u_mail]);
+        DB::insert('insert into message (title,content,uid)
+    values (?,?,?)',[$title,$content,$u_mail]);
      return redirect()->action('MessageController@index');
         // return redirect()->refresh();
     }

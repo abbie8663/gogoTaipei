@@ -56,8 +56,8 @@ Route::post('/deletemessage', 'MessageController@delete')->name('delete');
 
 
 //收藏
-Route::get('/favorite', 'FavoriteController@index')->name('favorite');
-Route::post('/favorite/add', 'FavoriteController@add')->name('addfavorite');
+Route::get('/favorite', 'FavoriteController@index')->name('favorite')->middleware('auth');
+Route::post('/favorite/add', 'FavoriteController@add')->name('addfavorite')->middleware('auth');
 Route::get('/favorite/destory/{id}', 'FavoriteController@destory')->name('destoryfavorite');
 
 //管理員

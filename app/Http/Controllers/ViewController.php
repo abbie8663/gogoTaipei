@@ -44,13 +44,13 @@ class ViewController extends Controller
       
         $views = DB::table('views')->where('vid', 'like', '%'.$search.'%')
         ->orwhere('name', 'like', '%'.$search.'%')
-        ->orwhere('description', 'like', '%'.$search.'%')
-        ->orwhere('tel', 'like', '%'.$search.'%')
+        // ->orwhere('description', 'like', '%'.$search.'%')
+        // ->orwhere('tel', 'like', '%'.$search.'%')
         ->orwhere('address', 'like', '%'.$search.'%')
-        ->orwhere('zipcode', 'like', '%'.$search.'%')
-        ->orwhere('opentime', 'like', '%'.$search.'%')
-        ->orwhere('px', 'like', '%'.$search.'%')
-        ->orwhere('py', 'like', '%'.$search.'%')
+        // ->orwhere('zipcode', 'like', '%'.$search.'%')
+        // ->orwhere('opentime', 'like', '%'.$search.'%')
+        // ->orwhere('px', 'like', '%'.$search.'%')
+        // ->orwhere('py', 'like', '%'.$search.'%')
         ->paginate(15);
         
         //判斷哪些該亮愛心

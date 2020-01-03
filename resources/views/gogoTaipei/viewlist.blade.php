@@ -21,7 +21,7 @@
             <div class="col-md-10" data-aos="fade-up" data-aos-delay="400">
                 <div class="row justify-content-center">
                     <div class="col-md-8 text-center">
-                        <h1>viewlist</h1>
+                        <h1>旅遊景點</h1>
                     </div>
                 </div>
             </div>
